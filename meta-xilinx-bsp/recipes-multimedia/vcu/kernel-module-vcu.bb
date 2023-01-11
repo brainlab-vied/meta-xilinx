@@ -9,12 +9,17 @@ PV = "${XILINX_VCU_VERSION}-xilinx-${XILINX_RELEASE_VERSION}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-BRANCH = "xlnx_rel_v2021.1"
+FILESEXTRAPATHS_prepend = "${THISDIR}/files:"
+
+BRANCH = "xlnx_rel_v2022.1"
 REPO = "git://github.com/Xilinx/vcu-modules.git;protocol=https"
-SRCREV = "b74f3fad9ba3ba3adf609cf4fff3570f3a1289ff"
+SRCREV = "9d2657550eccebccce08cacfcdd369367b9f6be4"
 
 BRANCHARG = "${@['nobranch=1', 'branch=${BRANCH}'][d.getVar('BRANCH', True) != '']}"
-SRC_URI = "${REPO};${BRANCHARG}"
+SRC_URI = " \
+    ${REPO};${BRANCHARG} \
+    file://99-vcu-enc-dec.rules \
+    "
 
 inherit module
 
@@ -26,3 +31,10 @@ COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE_zynqmp = "zynqmp"
 
 KERNEL_MODULE_AUTOLOAD += "dmaproxy"
+
+do_install_append() {
+    install -d ${D}${sysconfdir}/udev/rules.d
+    install -m 0644 ${WORKDIR}/99-vcu-enc-dec.rules ${D}${sysconfdir}/udev/rules.d/
+}
+
+FILES_${PN} = "${sysconfdir}/udev/rules.d/*"
