@@ -4,11 +4,11 @@ LINUX_VERSION_EXTENSION ?= "-xilinx-${XILINX_RELEASE_VERSION}"
 PV = "${LINUX_VERSION}+git${SRCPV}"
 
 # Sources, by default allow for the use of SRCREV pointing to orphaned tags/commits
-KBRANCH ?= "xlnx_rebase_v5.10"
+KBRANCH ?= "feature/xilinx-2021.1-allegro-dvt-upstream-driver"
 SRCBRANCHARG = "${@['nobranch=1', 'branch=${KBRANCH}'][d.getVar('KBRANCH', True) != '']}"
 
 FILESOVERRIDES_append = ":${XILINX_RELEASE_VERSION}"
-KERNELURI ?= "git://github.com/Xilinx/linux-xlnx.git;protocol=https;name=machine"
+KERNELURI ?= "git://github.com/brainlab-vied/linux-xlnx.git;protocol=https;name=machine"
 YOCTO_META ?= "git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-5.10;destsuffix=yocto-kmeta"
 SRC_URI = "${KERNELURI};${SRCBRANCHARG} ${YOCTO_META}"
 
