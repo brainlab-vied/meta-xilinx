@@ -10,7 +10,8 @@ S  = "${WORKDIR}/git"
 
 BRANCH ?= "xlnx_rel_v2021.1"
 REPO ?= "git://github.com/Xilinx/vcu-firmware.git;protocol=https"
-SRCREV = "73780a2f55a4e9c10de525cdb0335fbb62364217"
+# only v2019.2 fimware works with upstream encoder
+SRCREV = "29ab982965b797b1c9b567faba47378578398f4a"
 
 BRANCHARG = "${@['nobranch=1', 'branch=${BRANCH}'][d.getVar('BRANCH', True) != '']}"
 SRC_URI   = "${REPO};${BRANCHARG}"
