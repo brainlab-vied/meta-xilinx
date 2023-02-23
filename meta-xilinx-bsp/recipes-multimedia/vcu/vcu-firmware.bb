@@ -8,7 +8,7 @@ PV = "${XILINX_VCU_VERSION}-xilinx-${XILINX_RELEASE_VERSION}+git${SRCPV}"
 
 S  = "${WORKDIR}/git"
 
-BRANCH ?= "xlnx_rel_v2021.1"
+BRANCH ?= "release-2019.2"
 REPO ?= "git://github.com/Xilinx/vcu-firmware.git;protocol=https"
 # only v2019.2 fimware works with upstream encoder
 SRCREV = "29ab982965b797b1c9b567faba47378578398f4a"
